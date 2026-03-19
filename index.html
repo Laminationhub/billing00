@@ -6,7 +6,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Lamination Hub - Pro Suite</title>
+    <title>Billing Hub Powered By Lamination Hub</title>
     
     <link rel="manifest" id="manifest-placeholder">
     
@@ -15,7 +15,7 @@
         body { font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; background-color: var(--light); height: 100vh; overflow: hidden; color: #333; }
         #login-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--dark); display: flex; justify-content: center; align-items: center; z-index: 9999; }
         .login-box { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); text-align: center; width: 350px; }
-        .login-box h2 { margin-top: 0; color: var(--dark); }
+        .login-box h2 { margin-top: 0; margin-bottom: 5px; color: var(--dark); }
         .login-box input { width: 100%; padding: 12px; margin: 20px 0; border: 2px solid #eee; border-radius: 8px; font-size: 1.1em; text-align: center; outline: none; transition: 0.3s; }
         .login-box input:focus { border-color: var(--primary); }
         
@@ -101,8 +101,9 @@
 
     <div id="login-screen">
         <div class="login-box">
-            <h1 style="color:var(--primary); margin-bottom:0;">LH</h1>
-            <h2>Lamination Hub</h2>
+            <h1 style="color:var(--primary); margin-bottom:0;">BH</h1>
+            <h2>Billing Hub</h2>
+            <div style="font-size: 0.85em; color: #64748b; margin-bottom: 15px; font-weight: bold;">Powered By Lamination Hub</div>
             <p style="color:#666; margin-bottom: 20px;" id="login-status">Sign in or use Local Mode</p>
             
             <button class="btn-google" id="googleLoginBtn" onclick="handleGoogleLogin()">
@@ -123,7 +124,7 @@
                 <div class="profile-pic-container">
                     <img id="sidebar-img" src="https://via.placeholder.com/80" alt="Profile">
                 </div>
-                <h2 id="brand-name">Lamination Hub</h2>
+                <h2 id="brand-name">Billing Hub</h2>
                 <p id="brand-city" style="font-size: 0.8em; opacity: 0.7; margin-top: 5px;">Kurebhar Branch</p>
                 <button class="btn btn-danger" style="width:100%; margin-top:15px; padding:8px; font-size:0.8em;" onclick="lockScreen()">🔒 Lock System</button>
             </div>
@@ -410,19 +411,173 @@
 
     <div id="customerModal" class="modal-bg"><div class="modal-box"><h3>New Customer</h3><div class="form-group"><label>Full Name</label><input type="text" id="cName"></div><div class="form-group"><label>Phone</label><input type="text" id="cPhone"></div><button class="btn btn-green" style="width:100%" onclick="saveCustomer()">Register</button><br><br><button class="btn btn-gray" style="width:100%" onclick="closeModals()">Cancel</button></div></div>
     
-    <div id="supplierModal" class="modal-bg"> <div class="modal-box modal-box-large"> <h3>Add New Supplier</h3> <div style="display: flex; gap: 15px; margin-bottom: 15px;"> <label><input type="radio" name="supType" value="Business" checked> Business</label> <label><input type="radio" name="supType" value="Individual"> Individual</label> </div> <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;"> <div class="form-group"><label>Contact ID (Auto if empty)</label><input type="text" id="supContactId" placeholder="Leave empty to autogenerate"></div> <div class="form-group"><label>Name / Company *</label><input type="text" id="supName" placeholder="Required"></div> <div class="form-group"><label>Mobile *</label><input type="text" id="supMobile" placeholder="Required"></div> <div class="form-group"><label>Alternate Contact Number</label><input type="text" id="supAltMobile"></div> <div class="form-group"><label>Landline</label><input type="text" id="supLandline"></div> <div class="form-group"><label>Email</label><input type="text" id="supEmail"></div> <div class="form-group"><label>Tax Number</label><input type="text" id="supTax"></div> <div class="form-group"><label>Opening Balance</label><input type="number" id="supOpeningBalance" value="0"></div> <div class="form-group"> <label>Pay Term</label> <div style="display:flex; gap:5px;"> <input type="number" id="supPayTermVal" style="width:50%;"> <select id="supPayTermType" style="width:50%;"> <option value="Days">Days</option> <option value="Months">Months</option> </select> </div> </div> </div> <h4 style="margin-bottom: 10px; color:#666; border-bottom: 1px solid #eee; padding-bottom:5px;">Address Information</h4> <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;"> <div class="form-group" style="grid-column: span 2;"><label>Address Line 1</label><input type="text" id="supAddress1"></div> <div class="form-group" style="grid-column: span 2;"><label>Address Line 2</label><input type="text" id="supAddress2"></div> <div class="form-group"><label>City</label><input type="text" id="supCity"></div> <div class="form-group"><label>State</label><input type="text" id="supState"></div> <div class="form-group"><label>Country</label><input type="text" id="supCountry"></div> <div class="form-group"><label>Zip Code</label><input type="text" id="supZip"></div> </div> <h4 style="margin-bottom: 10px; color:#666; border-bottom: 1px solid #eee; padding-bottom:5px;">Custom Fields</h4> <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;"> <div class="form-group"><label>Custom Field 1</label><input type="text" id="supCustom1"></div> <div class="form-group"><label>Custom Field 2</label><input type="text" id="supCustom2"></div> <div class="form-group"><label>Custom Field 3</label><input type="text" id="supCustom3"></div> <div class="form-group"><label>Custom Field 4</label><input type="text" id="supCustom4"></div> </div> <button class="btn btn-dark" style="width:100%; margin-top: 15px;" onclick="saveSupplier()">Save Supplier</button><br><br> <button class="btn btn-gray" style="width:100%" onclick="closeModals()">Cancel</button> </div> </div>
+    <div id="supplierModal" class="modal-bg">
+        <div class="modal-box modal-box-large">
+            <h3>Add New Supplier</h3>
+            <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                <label><input type="radio" name="supType" value="Business" checked> Business</label>
+                <label><input type="radio" name="supType" value="Individual"> Individual</label>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="form-group"><label>Contact ID (Auto if empty)</label><input type="text" id="supContactId" placeholder="Leave empty to autogenerate"></div>
+                <div class="form-group"><label>Name / Company *</label><input type="text" id="supName" placeholder="Required"></div>
+                <div class="form-group"><label>Mobile *</label><input type="text" id="supMobile" placeholder="Required"></div>
+                <div class="form-group"><label>Alternate Contact Number</label><input type="text" id="supAltMobile"></div>
+                <div class="form-group"><label>Landline</label><input type="text" id="supLandline"></div>
+                <div class="form-group"><label>Email</label><input type="text" id="supEmail"></div>
+                <div class="form-group"><label>Tax Number</label><input type="text" id="supTax"></div>
+                <div class="form-group"><label>Opening Balance</label><input type="number" id="supOpeningBalance" value="0"></div>
+                <div class="form-group">
+                    <label>Pay Term</label>
+                    <div style="display:flex; gap:5px;">
+                        <input type="number" id="supPayTermVal" style="width:50%;">
+                        <select id="supPayTermType" style="width:50%;">
+                            <option value="Days">Days</option>
+                            <option value="Months">Months</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <h4 style="margin-bottom: 10px; color:#666; border-bottom: 1px solid #eee; padding-bottom:5px;">Address Information</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="form-group" style="grid-column: span 2;"><label>Address Line 1</label><input type="text" id="supAddress1"></div>
+                <div class="form-group" style="grid-column: span 2;"><label>Address Line 2</label><input type="text" id="supAddress2"></div>
+                <div class="form-group"><label>City</label><input type="text" id="supCity"></div>
+                <div class="form-group"><label>State</label><input type="text" id="supState"></div>
+                <div class="form-group"><label>Country</label><input type="text" id="supCountry"></div>
+                <div class="form-group"><label>Zip Code</label><input type="text" id="supZip"></div>
+            </div>
+            
+            <h4 style="margin-bottom: 10px; color:#666; border-bottom: 1px solid #eee; padding-bottom:5px;">Custom Fields</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="form-group"><label>Custom Field 1</label><input type="text" id="supCustom1"></div>
+                <div class="form-group"><label>Custom Field 2</label><input type="text" id="supCustom2"></div>
+                <div class="form-group"><label>Custom Field 3</label><input type="text" id="supCustom3"></div>
+                <div class="form-group"><label>Custom Field 4</label><input type="text" id="supCustom4"></div>
+            </div>
+            
+            <button class="btn btn-dark" style="width:100%; margin-top: 15px;" onclick="saveSupplier()">Save Supplier</button><br><br>
+            <button class="btn btn-gray" style="width:100%" onclick="closeModals()">Cancel</button>
+        </div>
+    </div>
+
     <div id="supplierPurchaseModal" class="modal-bg"><div class="modal-box"><h3>Log Purchase from Supplier</h3><input type="hidden" id="spId_purchase"><div class="form-group"><label>Bill Amount (₹)</label><input type="number" id="spAmountBought" placeholder="Amount purchased"></div><button class="btn btn-blue" style="width:100%" onclick="saveSupplierPurchase()">Add Purchase</button><br><br><button class="btn btn-gray" style="width:100%" onclick="closeModals()">Cancel</button></div></div>
-    <div id="supplierPaymentModal" class="modal-bg"><div class="modal-box"><h3>Log Payment to Supplier</h3><input type="hidden" id="spId_payment"><div class="form-group"><label>Amount Paid (₹)</label><input type="number" id="spAmountPaid" placeholder="Amount paid"></div><button class="btn btn-green" style="width:100%" onclick="saveSupplierPayment()">Record Payment</button><br><br><button class="btn btn-gray" style="width:100%" onclick="closeModals()">Cancel</button></div></div>
-    <div id="categoryModal" class="modal-bg"><div class="modal-box"><h3>Manage Categories</h3><div class="form-group"><label>New Category Name</label><input type="text" id="newCatName"></div><button class="btn btn-warning" style="width:100%; margin-bottom: 15px;" onclick="addCategory()">Add Category</button><div id="catListArea" style="max-height: 150px; overflow-y:auto; border: 1px solid #eee; padding: 10px; border-radius: 5px;"></div><br><button class="btn btn-gray" style="width:100%" onclick="closeModals()">Close</button></div></div>
-    <div id="productModal" class="modal-bg"> <div class="modal-box"> <h3>Product Info</h3> <div class="form-group"><label>Name</label><input type="text" id="pName"></div> <div class="form-group"><label>Barcode / SKU (Optional)</label><input type="text" id="pBarcode" placeholder="Scan or type barcode..."></div> <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;"> <div class="form-group"><label>Category</label><select id="pCat"><option value="General">General</option></select></div> <div class="form-group"><label>Supplier</label><select id="pSupplier"><option value="None">None</option></select></div> </div> <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;"> <div class="form-group"><label>Brand</label><input type="text" id="pBrand" placeholder="e.g. 3M"></div> <div class="form-group"> <label>Unit</label> <select id="pUnit"> <option value="pcs">Pieces (pcs)</option> <option value="kg">Kilogram (kg)</option> <option value="mtr">Meter (mtr)</option> <option value="sqft">Sq. Ft.</option> <option value="pkt">Packet</option> <option value="box">Box</option> </select> </div> </div> <div class="form-group"><label>Warranty</label><input type="text" id="pWarranty" placeholder="e.g. 6 Months, 1 Year, None"></div> <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;"> <div class="form-group"><label>Price (₹)</label><input type="number" id="pPrice"></div> <div class="form-group"><label>Stock Qty</label><input type="number" id="pStock"></div> </div> <button class="btn btn-blue" style="width:100%" onclick="saveProduct()">Save Product</button><br><br> <button class="btn btn-gray" style="width:100%" onclick="closeModals()">Cancel</button> </div> </div>
-    <div id="expenseModal" class="modal-bg"> <div class="modal-box"> <h3>Log Expense</h3> <div class="form-group"> <label>Category</label> <select id="eCat"> <option value="Raw Materials">Raw Materials</option> <option value="Rent">Rent</option> <option value="Electricity">Electricity</option> <option value="Maintenance">Maintenance</option> <option value="Other">Other</option> </select> </div> <div class="form-group"><label>Description</label><input type="text" id="eDesc"></div> <div class="form-group"><label>Amount (₹)</label><input type="number" id="eAmt"></div> <button class="btn btn-danger" style="width:100%" onclick="saveExpense()">Save Expense</button><br><br> <button class="btn btn-gray" style="width:100%" onclick="closeModals()">Cancel</button> </div> </div>
-    <div id="viewBillModal" class="modal-bg"><div class="modal-box" id="billDetailContent"></div></div>
-    <div id="billPaymentModal" class="modal-bg"> <div class="modal-box"> <h3>Pay Pending Bill Due</h3> <p style="font-size: 0.9em; color:#666;">Current Due: <strong style="color:red;">₹<span id="bpCurrentDue">0</span></strong></p> <input type="hidden" id="bpBillId"> <div class="form-group"> <label>Amount to Pay (₹)</label> <input type="number" id="bpAmount" placeholder="Enter amount"> </div> <button class="btn btn-green" style="width:100%" onclick="saveBillPayment()">Submit Payment</button><br><br> <button class="btn btn-gray" style="width:100%" onclick="closeModals()">Cancel</button> </div> </div>
-    <div id="customerPaymentModal" class="modal-bg"> <div class="modal-box"> <h3>Pay Customer Due Balance</h3> <p style="font-size: 0.9em; color:#666;">Total Ledger Due: <strong style="color:red;">₹<span id="cpCurrentDue">0</span></strong></p> <input type="hidden" id="cpCustId"> <div class="form-group"> <label>Amount Customer is Paying (₹)</label> <input type="number" id="cpAmount" placeholder="Enter amount"> </div> <button class="btn btn-green" style="width:100%" onclick="saveCustomerPayment()">Apply Payment</button><br><br> <button class="btn btn-gray" style="width:100%" onclick="closeModals()">Cancel</button> </div> </div>
-    <div id="bulkModal" class="modal-bg"> <div class="modal-box" style="width: 500px;"> <h3>Bulk Stock Update</h3> <p style="font-size: 0.8em; color: #666;">Enter the quantity to ADD to current stock (e.g., +10).</p> <div id="bulkItemsContainer" style="max-height: 300px; overflow-y: auto; margin: 15px 0; border: 1px solid #eee; border-radius: 8px;"></div> <button class="btn btn-blue" style="width:100%" onclick="saveBulkStock()">Update All & Sync</button><br><br> <button class="btn btn-gray" style="width:100%" onclick="closeModals()">Cancel</button> </div> </div>
-    <div id="scannerModal" class="modal-bg"><div class="modal-box"><h3>📷 Scan Barcode</h3><div id="reader"></div><button class="btn btn-gray" style="width:100%; margin-top:15px;" onclick="closeScanner()">Cancel</button></div></div>
-    <div id="broadcastModal" class="modal-bg"> <div class="modal-box" style="width: 500px;"> <h3>📢 WhatsApp Promo Broadcast</h3> <p style="font-size: 0.8em; color: #666;">Type your offer below and click generate to send to your customer list.</p> <textarea id="broadcastMsg" rows="4" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; outline: none; margin-bottom: 10px;" placeholder="Ex: Flat 20% off on all Laptop Skins this weekend at Lamination Hub!"></textarea> <button class="btn btn-blue" style="width:100%" onclick="generateBroadcastLinks()">Generate Send Links</button> <div id="broadcastLinksContainer" style="max-height: 250px; overflow-y: auto; margin-top: 15px;"></div> <button class="btn btn-gray" style="width:100%; margin-top:15px;" onclick="closeModals()">Close</button> </div> </div>
     
+    <div id="supplierPaymentModal" class="modal-bg"><div class="modal-box"><h3>Log Payment to Supplier</h3><input type="hidden" id="spId_payment"><div class="form-group"><label>Amount Paid (₹)</label><input type="number" id="spAmountPaid" placeholder="Amount paid"></div><button class="btn btn-green" style="width:100%" onclick="saveSupplierPayment()">Record Payment</button><br><br><button class="btn btn-gray" style="width:100%" onclick="closeModals()">Cancel</button></div></div>
+    
+    <div id="categoryModal" class="modal-bg"><div class="modal-box"><h3>Manage Categories</h3><div class="form-group"><label>New Category Name</label><input type="text" id="newCatName"></div><button class="btn btn-warning" style="width:100%; margin-bottom: 15px;" onclick="addCategory()">Add Category</button><div id="catListArea" style="max-height: 150px; overflow-y:auto; border: 1px solid #eee; padding: 10px; border-radius: 5px;"></div><br><button class="btn btn-gray" style="width:100%" onclick="closeModals()">Close</button></div></div>
+
+    <div id="productModal" class="modal-bg">
+        <div class="modal-box">
+            <h3>Product Info</h3>
+            <div class="form-group"><label>Name</label><input type="text" id="pName"></div>
+            <div class="form-group"><label>Barcode / SKU (Optional)</label><input type="text" id="pBarcode" placeholder="Scan or type barcode..."></div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="form-group"><label>Category</label><select id="pCat"><option value="General">General</option></select></div>
+                <div class="form-group"><label>Supplier</label><select id="pSupplier"><option value="None">None</option></select></div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="form-group"><label>Brand</label><input type="text" id="pBrand" placeholder="e.g. 3M"></div>
+                <div class="form-group">
+                    <label>Unit</label>
+                    <select id="pUnit">
+                        <option value="pcs">Pieces (pcs)</option>
+                        <option value="kg">Kilogram (kg)</option>
+                        <option value="mtr">Meter (mtr)</option>
+                        <option value="sqft">Sq. Ft.</option>
+                        <option value="pkt">Packet</option>
+                        <option value="box">Box</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group"><label>Warranty</label><input type="text" id="pWarranty" placeholder="e.g. 6 Months, 1 Year, None"></div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="form-group"><label>Price (₹)</label><input type="number" id="pPrice"></div>
+                <div class="form-group"><label>Stock Qty</label><input type="number" id="pStock"></div>
+            </div>
+            <button class="btn btn-blue" style="width:100%" onclick="saveProduct()">Save Product</button><br><br>
+            <button class="btn btn-gray" style="width:100%" onclick="closeModals()">Cancel</button>
+        </div>
+    </div>
+    
+    <div id="expenseModal" class="modal-bg">
+        <div class="modal-box">
+            <h3>Log Expense</h3>
+            <div class="form-group">
+                <label>Category</label>
+                <select id="eCat">
+                    <option value="Raw Materials">Raw Materials</option>
+                    <option value="Rent">Rent</option>
+                    <option value="Electricity">Electricity</option>
+                    <option value="Maintenance">Maintenance</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group"><label>Description</label><input type="text" id="eDesc"></div>
+            <div class="form-group"><label>Amount (₹)</label><input type="number" id="eAmt"></div>
+            <button class="btn btn-danger" style="width:100%" onclick="saveExpense()">Save Expense</button><br><br>
+            <button class="btn btn-gray" style="width:100%" onclick="closeModals()">Cancel</button>
+        </div>
+    </div>
+    
+    <div id="viewBillModal" class="modal-bg"><div class="modal-box" id="billDetailContent"></div></div>
+
+    <div id="billPaymentModal" class="modal-bg">
+        <div class="modal-box">
+            <h3>Pay Pending Bill Due</h3>
+            <p style="font-size: 0.9em; color:#666;">Current Due: <strong style="color:red;">₹<span id="bpCurrentDue">0</span></strong></p>
+            <input type="hidden" id="bpBillId">
+            <div class="form-group">
+                <label>Amount to Pay (₹)</label>
+                <input type="number" id="bpAmount" placeholder="Enter amount">
+            </div>
+            <button class="btn btn-green" style="width:100%" onclick="saveBillPayment()">Submit Payment</button><br><br>
+            <button class="btn btn-gray" style="width:100%" onclick="closeModals()">Cancel</button>
+        </div>
+    </div>
+
+    <div id="customerPaymentModal" class="modal-bg">
+        <div class="modal-box">
+            <h3>Pay Customer Due Balance</h3>
+            <p style="font-size: 0.9em; color:#666;">Total Ledger Due: <strong style="color:red;">₹<span id="cpCurrentDue">0</span></strong></p>
+            <input type="hidden" id="cpCustId">
+            <div class="form-group">
+                <label>Amount Customer is Paying (₹)</label>
+                <input type="number" id="cpAmount" placeholder="Enter amount">
+            </div>
+            <button class="btn btn-green" style="width:100%" onclick="saveCustomerPayment()">Apply Payment</button><br><br>
+            <button class="btn btn-gray" style="width:100%" onclick="closeModals()">Cancel</button>
+        </div>
+    </div>
+    
+    <div id="bulkModal" class="modal-bg">
+        <div class="modal-box" style="width: 500px;">
+            <h3>Bulk Stock Update</h3>
+            <p style="font-size: 0.8em; color: #666;">Enter the quantity to ADD to current stock (e.g., +10).</p>
+            <div id="bulkItemsContainer" style="max-height: 300px; overflow-y: auto; margin: 15px 0; border: 1px solid #eee; border-radius: 8px;"></div>
+            <button class="btn btn-blue" style="width:100%" onclick="saveBulkStock()">Update All & Sync</button><br><br>
+            <button class="btn btn-gray" style="width:100%" onclick="closeModals()">Cancel</button>
+        </div>
+    </div>
+
+    <div id="scannerModal" class="modal-bg"><div class="modal-box"><h3>📷 Scan Barcode</h3><div id="reader"></div><button class="btn btn-gray" style="width:100%; margin-top:15px;" onclick="closeScanner()">Cancel</button></div></div>
+
+    <div id="broadcastModal" class="modal-bg">
+        <div class="modal-box" style="width: 500px;">
+            <h3>📢 WhatsApp Promo Broadcast</h3>
+            <p style="font-size: 0.8em; color: #666;">Type your offer below and click generate to send to your customer list.</p>
+            <textarea id="broadcastMsg" rows="4" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; outline: none; margin-bottom: 10px;" placeholder="Ex: Flat 20% off on all Laptop Skins this weekend at Lamination Hub!"></textarea>
+            <button class="btn btn-blue" style="width:100%" onclick="generateBroadcastLinks()">Generate Send Links</button>
+            <div id="broadcastLinksContainer" style="max-height: 250px; overflow-y: auto; margin-top: 15px;"></div>
+            <button class="btn btn-gray" style="width:100%; margin-top:15px;" onclick="closeModals()">Close</button>
+        </div>
+    </div>
+
     <div id="quickBillModal" class="modal-bg">
         <div class="modal-box" style="width: 400px; padding: 25px; background: #f1f5f9;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
@@ -494,7 +649,7 @@
 
     <script>
         // PWA INLINE MANIFEST
-        const manifest = { "name": "Lamination Hub Pro", "short_name": "LH Pro", "start_url": ".", "display": "standalone", "background_color": "#2c3e50", "theme_color": "#007bff", "icons": [{"src": "https://via.placeholder.com/192/007bff/ffffff?text=LH", "sizes": "192x192", "type": "image/png"}] };
+        const manifest = { "name": "Billing Hub", "short_name": "Billing Hub", "start_url": ".", "display": "standalone", "background_color": "#2c3e50", "theme_color": "#007bff", "icons": [{"src": "https://via.placeholder.com/192/007bff/ffffff?text=BH", "sizes": "192x192", "type": "image/png"}] };
         const manifestBlob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
         document.getElementById('manifest-placeholder').href = URL.createObjectURL(manifestBlob);
 
@@ -519,7 +674,7 @@
 
         // DATA STATE
         let appPass = '1234';
-        let settings = { name: 'Lamination Hub', city: 'Kurebhar', address: '', gst: '', phone: '', email: '', profilePic: '', staffPin: '', printerSize: 'A4', receiptLanguage: 'EN', taxRate: 0, taxMode: 'EXCLUSIVE', customTaxRates: [], upiId: '' };
+        let settings = { name: 'Billing Hub', city: 'Kurebhar', address: '', gst: '', phone: '', email: '', profilePic: '', staffPin: '', printerSize: 'A4', receiptLanguage: 'EN', taxRate: 0, taxMode: 'EXCLUSIVE', customTaxRates: [], upiId: '' };
         let inventory = []; let sales = []; let expenses = []; let customers = [{id:1, name:'Walk-in', phone:'--', spent:0, due:0, points:0}];
         let suppliers = []; let quotations = []; let categories = ["General"]; 
         let cart = []; let custTrigger = "list"; let tempBase64Img = ""; let editingProductId = null;
@@ -740,7 +895,7 @@
 
         // SMART DATA LOADER
         function loadLocalData() {
-            appPass = '1234'; settings = { name: 'Lamination Hub', city: 'Kurebhar', address: '', gst: '', phone: '', email: '', profilePic: '', staffPin: '', printerSize: 'A4', receiptLanguage: 'EN', taxRate: 0, taxMode: 'EXCLUSIVE', customTaxRates: [], upiId: '' };
+            appPass = '1234'; settings = { name: 'Billing Hub', city: 'Kurebhar', address: '', gst: '', phone: '', email: '', profilePic: '', staffPin: '', printerSize: 'A4', receiptLanguage: 'EN', taxRate: 0, taxMode: 'EXCLUSIVE', customTaxRates: [], upiId: '' };
             inventory = []; sales = []; expenses = []; customers = [{id:1, name:'Walk-in', phone:'--', spent:0, due:0, points:0}];
             suppliers = []; quotations = []; categories = ["General"];
             
@@ -789,7 +944,7 @@
                     let c_cat = c.categories || ["General"];
                     c_cat.forEach(cat => { if(!categories.includes(cat)) categories.push(cat); });
 
-                    if(c.settings && (!settings.name || settings.name === 'Lamination Hub')) {
+                    if(c.settings && (!settings.name || settings.name === 'Billing Hub' || settings.name === 'Lamination Hub')) {
                         settings = c.settings;
                     }
                 }
